@@ -14,7 +14,6 @@ public class HelloController {
 
     @RequestMapping("/sayHello")
     public  String sayHello(){
-        System.out.println();
         return  "success1111";
     }
 
