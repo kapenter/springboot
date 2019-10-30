@@ -10,10 +10,10 @@
 
 <!--数据元-->
     <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" >
-        <property name="url" value=""/>
-        <property name="driverClassName" value=""/>
-        <property name="username" value=""/>
-        <property name="password" value=""/>
+        <property name="url" value="jdbc:mysql://172.20.21.40:3306/management?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
 
         <!-- 配置初始化大小、最小、最大 -->
         <!-- 通常来说，只需要修改initialSize、minIdle、maxActive -->
