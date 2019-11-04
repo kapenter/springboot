@@ -2,6 +2,7 @@ package com.jackson.springboot.mapper;
 
 import com.jackson.springboot.module.User;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -10,5 +11,8 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface UserMapper extends AutoMapper<User,Long> {
 
+
+
+    User getUser();
 
 }

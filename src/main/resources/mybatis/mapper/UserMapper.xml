@@ -7,4 +7,13 @@
 		 id, username, realName, email, mobile, pwd, orgId, merchantId, accountState, pwdState, state, createTime, modTime
 	</sql>
 
+
+	<select id="getUser" resultType="com.jackson.springboot.module.User">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		t_user
+		WHERE  id = 13
+	</select>
+
 </mapper>

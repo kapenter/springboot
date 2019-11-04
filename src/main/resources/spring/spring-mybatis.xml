@@ -9,9 +9,9 @@
    	  ">
 
 <!--数据元-->
-    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" >
-        <property name="url" value="jdbc:mysql://172.20.21.40:3306/management?useUnicode=true&amp;characterEncoding=UTF-8"/>
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init" destroy-method="close" primary="true">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://172.20.21.40:3306/management?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=true"/>
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
 
@@ -40,12 +40,16 @@
         <property name="connectionProperties" value="config.decrypt=false"/>
     </bean>
 
+    <!-- 加载 mapper.xml 接口 配置文件 -->
+    <bean id="mapperScannerConfiguration" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jackson.springboot.mapper"/>
+    </bean>
 
     <bean id="sqlSessionFactory"  class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="druidDataSource"/>
-        <property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"/>
+        <!--<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"/>-->
         <property name="typeAliasesPackage" value="com.com.jackson.springboot.module"/>
-        <property name="mapperLocations" value="classpath:/mybatis/mapper/" />
+        <property name="mapperLocations" value="classpath:/mybatis/mapper/*.xml" />
         <property name="plugins">
             <array>
                 <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
@@ -61,7 +65,7 @@
     </bean>
 
     <!--使用注解声明-->
-    <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>
+    <tx:annotation-driven proxy-target-class="true" mode="proxy" transaction-manager="transactionManager"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="druidDataSource"/>
